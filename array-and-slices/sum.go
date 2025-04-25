@@ -9,3 +9,14 @@ func Sum(numbers []int) int {
 
 	return sum
 }
+
+func SumAll(groupOfNumbers ...[]int) []int {
+	var sum []int
+
+	for _, group := range groupOfNumbers {
+		sum = append(sum, Sum(group))
+
+	}
+
+	return sum
+}

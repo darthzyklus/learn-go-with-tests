@@ -10,13 +10,18 @@ func Sum(numbers []int) int {
 	return sum
 }
 
-func SumAll(groupOfNumbers ...[]int) []int {
-	var sum []int
+func SumAllTails(groupOfNumbers ...[]int) []int {
+	var sums []int
 
 	for _, group := range groupOfNumbers {
-		sum = append(sum, Sum(group))
+		if len(group) == 0 {
+			sums = append(sums, 0)
+		} else {
+			tail := group[1:]
+			sums = append(sums, Sum(tail))
+		}
 
 	}
 
-	return sum
+	return sums
 }

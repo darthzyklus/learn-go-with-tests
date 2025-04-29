@@ -16,11 +16,11 @@ func (r Rectangle) Area() float64 {
 }
 
 type Circle struct {
-	Radius float64
+	radius float64
 }
 
 func (c Circle) Area() float64 {
-	return math.Pi * c.Radius * c.Radius
+	return math.Pi * c.radius * c.radius
 }
 
 func Perimeter(width float64, height float64) float64 {

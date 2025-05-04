@@ -4,8 +4,8 @@ type Wallet struct {
 	balance int
 }
 
-func (w *Wallet) Deposit(money int) {
-	w.balance = money
+func (w *Wallet) Deposit(amount int) {
+	w.balance = amount
 }
 
 func (w *Wallet) Balance() int {

@@ -12,7 +12,7 @@ func TestWallet(t *testing.T) {
 		want := Bitcoin(10)
 
 		if got != want {
-			t.Errorf("got %d want %d", got, want)
+			t.Errorf("got %s want %s", got, want)
 		}
 	})
 	t.Run("multiple deposits should get a balance equal to the sum of the deposit amounts", func(t *testing.T) {
@@ -25,7 +25,7 @@ func TestWallet(t *testing.T) {
 		want := Bitcoin(20)
 
 		if got != want {
-			t.Errorf("got %d want %d", got, want)
+			t.Errorf("got %s want %s", got, want)
 		}
 	})
 }

@@ -3,29 +3,34 @@ package main
 import "testing"
 
 func TestWallet(t *testing.T) {
-	t.Run("first deposit should be get the same amount of balance", func(t *testing.T) {
-		wallet := Wallet{}
-
-		wallet.Deposit(10)
-
+	assertBalance := func(t *testing.T, wallet Wallet, want Bitcoin) {
+		t.Helper()
 		got := wallet.Balance()
-		want := 10
 
 		if got != want {
-			t.Errorf("got %d want %d", got, want)
+			t.Errorf("got %s want %s", got, want)
 		}
+	}
+
+	t.Run("single deposit", func(t *testing.T) {
+		wallet := Wallet{}
+
+		wallet.Deposit(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
 	})
-	t.Run("multiple deposits should get a balance equal to the sum of the deposit amounts", func(t *testing.T) {
+	t.Run("multiple deposits", func(t *testing.T) {
 		wallet := Wallet{}
 
-		wallet.Deposit(10)
-		wallet.Deposit(10)
-
-		got := wallet.Balance()
-		want := 20
-
-		if got != want {
-			t.Errorf("got %d want %d", got, want)
+		wallet.Deposit(Bitcoin(10))
+		wallet.Deposit(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(20))
+	})
+	t.Run("withdraw", func(t *testing.T) {
+		wallet := Wallet{
+			balance: Bitcoin(20),
 		}
+
+		wallet.Withdraw(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
 	})
 }

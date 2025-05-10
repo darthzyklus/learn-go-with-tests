@@ -33,4 +33,13 @@ func TestWallet(t *testing.T) {
 		wallet.Withdraw(Bitcoin(10))
 		assertBalance(t, wallet, Bitcoin(10))
 	})
+	t.Run("multiple withdraws", func(t *testing.T) {
+		wallet := Wallet{
+			balance: Bitcoin(20),
+		}
+
+		wallet.Withdraw(Bitcoin(10))
+		wallet.Withdraw(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(0))
+	})
 }

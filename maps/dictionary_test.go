@@ -16,7 +16,7 @@ func TestSearch(t *testing.T) {
 		_, err := dictionary.Search("unknown")
 		want := "could not find the word you were looking for"
 
-		if err != nil {
+		if err == nil {
 			t.Fatal("expected to get an error...")
 		}
 

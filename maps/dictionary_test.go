@@ -40,6 +40,18 @@ func TestSearch(t *testing.T) {
 
 		assertError(t, err, ErrNotFound)
 	})
+
+	t.Run("translate word", func(t *testing.T) {
+		dictionary.AddTranslation("manual", "conjunto de instrucciones para explicar como funciona algo", "spanish")
+		translation, err := dictionary.Translate("manual", "spanish")
+
+		if err != nil {
+			t.Error("shout not get an error")
+		}
+
+		assertStrings(t, translation, "conjunto de instrucciones para explicar como funciona algo")
+
+	})
 }
 
 func assertError(t testing.TB, err error, want error) {

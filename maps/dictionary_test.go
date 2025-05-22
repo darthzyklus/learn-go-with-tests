@@ -20,6 +20,14 @@ func TestSearch(t *testing.T) {
 
 	})
 
+	t.Run("add new word", func(t *testing.T) {
+		dictionary.Add("manual", "set of instructions to explain how something works")
+
+		got, _ := dictionary.Search("manual")
+		want := "set of instructions to explain how something works"
+
+		assertStrings(t, got, want)
+	})
 }
 
 func assertError(t testing.TB, err error, want error) {

@@ -14,9 +14,7 @@ func TestSearch(t *testing.T) {
 
 	t.Run("unknown word", func(t *testing.T) {
 		_, err := dictionary.Search("unknown")
-		want := ErrNotFound
-
-		assertError(t, err, want)
+		assertError(t, err, ErrNotFound)
 
 	})
 
@@ -27,6 +25,20 @@ func TestSearch(t *testing.T) {
 		want := "set of instructions to explain how something works"
 
 		assertStrings(t, got, want)
+	})
+
+	t.Run("delete existing word", func(t *testing.T) {
+		dictionary.Add("manual", "set of instructions to explain how something works")
+
+		err := dictionary.Remove("manual")
+
+		if err != nil {
+			t.Error("should not get an error")
+		}
+
+		_, err = dictionary.Search("manual")
+
+		assertError(t, err, ErrNotFound)
 	})
 }
 

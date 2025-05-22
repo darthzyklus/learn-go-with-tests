@@ -19,3 +19,15 @@ func (d Dictionary) Search(word string) (string, error) {
 func (d Dictionary) Add(word string, definition string) {
 	d[word] = definition
 }
+
+func (d Dictionary) Remove(word string) error {
+	_, ok := d[word]
+
+	if !ok {
+		return ErrNotFound
+	}
+
+	delete(d, word)
+
+	return nil
+}

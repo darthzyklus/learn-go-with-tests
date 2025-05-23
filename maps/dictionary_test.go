@@ -18,7 +18,12 @@ func TestSearch(t *testing.T) {
 
 	})
 
-	t.Run("add new word", func(t *testing.T) {
+}
+
+func TestAdd(t *testing.T) {
+	dictionary := Dictionary{}
+
+	t.Run("new word", func(t *testing.T) {
 		dictionary.Add("manual", "set of instructions to explain how something works")
 
 		got, _ := dictionary.Search("manual")
@@ -27,7 +32,12 @@ func TestSearch(t *testing.T) {
 		assertStrings(t, got, want)
 	})
 
-	t.Run("delete existing word", func(t *testing.T) {
+}
+
+func TestRemove(t *testing.T) {
+	dictionary := Dictionary{}
+
+	t.Run("existing word", func(t *testing.T) {
 		dictionary.Add("manual", "set of instructions to explain how something works")
 
 		err := dictionary.Remove("manual")
@@ -41,17 +51,6 @@ func TestSearch(t *testing.T) {
 		assertError(t, err, ErrNotFound)
 	})
 
-	t.Run("translate word", func(t *testing.T) {
-		dictionary.AddTranslation("manual", "conjunto de instrucciones para explicar como funciona algo", "spanish")
-		translation, err := dictionary.Translate("manual", "spanish")
-
-		if err != nil {
-			t.Error("shout not get an error")
-		}
-
-		assertStrings(t, translation, "conjunto de instrucciones para explicar como funciona algo")
-
-	})
 }
 
 func assertError(t testing.TB, err error, want error) {

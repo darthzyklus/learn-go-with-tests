@@ -18,14 +18,18 @@ func (d Dictionary) Search(word string) (string, error) {
 }
 
 func (d Dictionary) Add(word string, definition string) error {
-	_, ok := d[word]
+	_, err := d.Search(word)
 
-	if ok {
-		return ErrWordExists
+	if err == ErrNotFound {
+		d[word] = definition
+		return nil
 	}
 
-	d[word] = definition
-	return nil
+	if err != nil {
+		return err
+	}
+
+	return ErrWordExists
 }
 
 func (d Dictionary) Remove(word string) error {
